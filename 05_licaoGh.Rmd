@@ -1,22 +1,145 @@
 ---
-title: "R Notebook"
-output:
-  html_document:
-    df_print: paged
+title: "Lição GitHub nº 5"
+subtitle: "Construindo gráficos com ggplot2"
+author: "Barbara Araujo Prates"
+date: "(18/07/2022)"
+output: 
+       html_notebook:
+       toc: yes
+       toc_float: yes
+       hightlight: tango
 ---
 
-This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+---
 
-Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+# Introdução
+Lição solicitada pelo professor Icaro Vidal na disciplina Estatatistica 2021.2, da Universidade Federal do Recôncavo da Bahia (UFRB), nesse repositório usaremos 6 tipos de gráficos, dentre eles Gráfico de Pontos, Gráfico de Linhas, Gráfico de Colunas, Histograma, Gráfico de Densidade e Boxplot, com pacote ggplot2, utilizando dataset, frango_dieta.csv e gordura_corporal.csv.
+
+### Caregando o "tidyverse"
 
 ```{r}
-plot(cars)
+library(tidyverse)
+```
+### Lendo os dados 
+
+```{r}
+dados_gc <- read_csv("dados/gordura_corporal.csv")
+dados_gc %>% view()
 ```
 
-Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
 
-When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+```{r}
+dados_frango <- read_csv("dados/frango_dieta.csv")
+dados_frango %>% view()
+```
 
-The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
 
-linha de teste
+
+## 1. Gráfico de Pontos;
+
+- dataset(dados_gc)
+
+
+```{r}
+ggplot(dados_gc) +
+  aes(x = idade, y = peso) +
+  geom_point(size = 1)
+```
+
+##### Resposta: o Gráfico de Pontos, mostra que pessoas com idade entre 40 á 50 anos, tem um índice de peso mais elevado, pela concentração dos pontos nessas idades.
+
+
+ 
+## 2. Gráfico de Linhas;
+
+- dataset(dados_gc)
+
+```{r}
+dados_gc %>% 
+  group_by(indice_gordura) %>% 
+  summarise(
+    media_idade = round(mean(idade), 1)
+  ) %>% 
+  ggplot(aes(x = indice_gordura, y = media_idade, group = 1)) +
+  geom_line(color = "#BF616A", size = 1) +
+  labs(
+    title = "Gráfico de Linhas dos indices gorduras ",
+    x = "",
+    y = "Média das idades"
+  ) +
+  theme_minimal()
+```
+
+#### Resposta: o Gráfico de Linhas, mostra que ocorre um aumento considerável com pessoas entre 50 anos ou mais, e tem índices de gordura elevados.
+
+
+## 3. Gráfico de Colunas (ou de Barras);
+
+- dataset(dados_gc)
+
+```{r}
+dados_gc %>% 
+  count(idade, peso) %>%
+  ggplot(aes(x = idade, y = peso, color = peso)) +
+  geom_col()
+```
+
+
+#### Resposta: o Gráfico de Colunas (ou de Barras), mostra como no gráfico de pontos, que pessoas com idade entre 40 á 50 anos, tem um índice de peso mais elevado.
+
+
+## 4. Histograma;
+
+- dataset(dados_frango)
+
+```{r}
+dados_frango %>% 
+  ggplot() +
+  aes(x = peso) +
+  geom_histogram(fill = "blue", color = "black") +
+  labs(
+    title = "Histograma das pesos",
+    x = "pesos",
+    y = ""
+  ) +
+  theme_minimal()
+```
+
+#### Resposta: o Histograma, mostra que tem um aumento considerável com pesos abaixo de 100, e uma atenuação pra pesos acima desse valor.  
+
+## 5. Gráfico de Densidade;
+
+- dataset(dados_gc)
+
+```{r}
+ dados_gc %>% 
+  ggplot() +
+  aes(x = peso ) +
+  geom_density(fill = "#404080")
+ 
+```
+
+
+#### Resposta: o Gráfico de Densidade, mostra que tem um aumento considerável com pessoas de pesos entre 150 á 200.  
+
+## 6. Boxplot.
+
+- dataset(dados_frango)
+
+```{r}
+dados_frango %>% 
+  ggplot() +
+  aes(x = tempo, y= peso) +
+  geom_boxplot(aes(fill = tempo), show.legend = FALSE) +
+  scale_fill_viridis_d()
+```
+
+#### resposta: o Boxplot mostra que a média dos dados frango, que o peso é aproximadamente 100. 
+
+
+
+
+
+
+
+

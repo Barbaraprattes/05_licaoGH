@@ -9,9 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Barbara Araujo Prates" />
 
 
-<title>R Notebook</title>
+<title>Lição GitHub nº 5</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -1762,37 +1763,196 @@ pre code {
 
 
 
-<h1 class="title toc-ignore">R Notebook</h1>
+<h1 class="title toc-ignore">Lição GitHub nº 5</h1>
+<h3 class="subtitle">Construindo gráficos com ggplot2</h3>
+<h4 class="author">Barbara Araujo Prates</h4>
+<h4 class="date">(18/07/2022)</h4>
 
 </div>
 
 
 <!-- rnb-text-begin -->
-<p>This is an <a href="http://rmarkdown.rstudio.com">R Markdown</a>
-Notebook. When you execute code within the notebook, the results appear
-beneath the code.</p>
-<p>Try executing this chunk by clicking the <em>Run</em> button within
-the chunk or by placing your cursor inside it and pressing
-<em>Ctrl+Shift+Enter</em>.</p>
+<hr />
+<div id="introdução" class="section level1">
+<h1>Introdução</h1>
+<p>Lição solicitada pelo professor Icaro Vidal na disciplina
+Estatatistica 2021.2, da Universidade Federal do Recôncavo da Bahia
+(UFRB), nesse repositório usaremos 6 tipos de gráficos, dentre eles
+Gráfico de Pontos, Gráfico de Linhas, Gráfico de Colunas, Histograma,
+Gráfico de Densidade e Boxplot, com pacote ggplot2, utilizando dataset,
+frango_dieta.csv e gordura_corporal.csv.</p>
+<div id="caregando-o-tidyverse" class="section level3">
+<h3>Caregando o “tidyverse”</h3>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGxvdChjYXJzKVxuYGBgIn0= -->
-<pre class="r"><code>plot(cars)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeSh0aWR5dmVyc2UpXG5gYGAifQ== -->
+<pre class="r"><code>library(tidyverse)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Add a new chunk by clicking the <em>Insert Chunk</em> button on the
-toolbar or by pressing <em>Ctrl+Alt+I</em>.</p>
-<p>When you save the notebook, an HTML file containing the code and
-output will be saved alongside it (click the <em>Preview</em> button or
-press <em>Ctrl+Shift+K</em> to preview the HTML file).</p>
-<p>The preview shows you a rendered HTML copy of the contents of the
-editor. Consequently, unlike <em>Knit</em>, <em>Preview</em> does not
-run any R code chunks. Instead, the output of the chunk when it was last
-run in the editor is displayed.</p>
+</div>
+<div id="lendo-os-dados" class="section level3">
+<h3>Lendo os dados</h3>
 <!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGFkb3NfZ2MgPC0gcmVhZF9jc3YoXCJkYWRvcy9nb3JkdXJhX2NvcnBvcmFsLmNzdlwiKVxuZGFkb3NfZ2MgJT4lIHZpZXcoKVxuYGBgIn0= -->
+<pre class="r"><code>dados_gc &lt;- read_csv(&quot;dados/gordura_corporal.csv&quot;)
+dados_gc %&gt;% view()</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGFkb3NfZnJhbmdvIDwtIHJlYWRfY3N2KFwiZGFkb3MvZnJhbmdvX2RpZXRhLmNzdlwiKVxuZGFkb3NfZnJhbmdvICU+JSB2aWV3KClcbmBgYCJ9 -->
+<pre class="r"><code>dados_frango &lt;- read_csv(&quot;dados/frango_dieta.csv&quot;)
+dados_frango %&gt;% view()</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="gráfico-de-pontos" class="section level2">
+<h2>1. Gráfico de Pontos;</h2>
+<ul>
+<li>dataset(dados_gc)</li>
+</ul>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ2dwbG90KGRhZG9zX2djKSArXG4gIGFlcyh4ID0gaWRhZGUsIHkgPSBwZXNvKSArXG4gIGdlb21fcG9pbnQoc2l6ZSA9IDEpXG5gYGAifQ== -->
+<pre class="r"><code>ggplot(dados_gc) +
+  aes(x = idade, y = peso) +
+  geom_point(size = 1)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<div id="resposta-o-gráfico-de-pontos-mostra-que-pessoas-com-idade-entre-40-á-50-anos-tem-um-índice-de-peso-mais-elevado-pela-concentração-dos-pontos-nessas-idades." class="section level5">
+<h5>Resposta: o Gráfico de Pontos, mostra que pessoas com idade entre 40
+á 50 anos, tem um índice de peso mais elevado, pela concentração dos
+pontos nessas idades.</h5>
+</div>
+</div>
+<div id="gráfico-de-linhas" class="section level2">
+<h2>2. Gráfico de Linhas;</h2>
+<ul>
+<li>dataset(dados_gc)</li>
+</ul>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGFkb3NfZ2MgJT4lIFxuICBncm91cF9ieShpbmRpY2VfZ29yZHVyYSkgJT4lIFxuICBzdW1tYXJpc2UoXG4gICAgbWVkaWFfaWRhZGUgPSByb3VuZChtZWFuKGlkYWRlKSwgMSlcbiAgKSAlPiUgXG4gIGdncGxvdChhZXMoeCA9IGluZGljZV9nb3JkdXJhLCB5ID0gbWVkaWFfaWRhZGUsIGdyb3VwID0gMSkpICtcbiAgZ2VvbV9saW5lKGNvbG9yID0gXCIjQkY2MTZBXCIsIHNpemUgPSAxKSArXG4gIGxhYnMoXG4gICAgdGl0bGUgPSBcIkdyw6FmaWNvIGRlIExpbmhhcyBkb3MgaW5kaWNlcyBnb3JkdXJhcyBcIixcbiAgICB4ID0gXCJcIixcbiAgICB5ID0gXCJNw6lkaWEgZGFzIGlkYWRlc1wiXG4gICkgK1xuICB0aGVtZV9taW5pbWFsKClcbmBgYCJ9 -->
+<pre class="r"><code>dados_gc %&gt;% 
+  group_by(indice_gordura) %&gt;% 
+  summarise(
+    media_idade = round(mean(idade), 1)
+  ) %&gt;% 
+  ggplot(aes(x = indice_gordura, y = media_idade, group = 1)) +
+  geom_line(color = &quot;#BF616A&quot;, size = 1) +
+  labs(
+    title = &quot;Gráfico de Linhas dos indices gorduras &quot;,
+    x = &quot;&quot;,
+    y = &quot;Média das idades&quot;
+  ) +
+  theme_minimal()</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<div id="resposta-o-gráfico-de-linhas-mostra-que-ocorre-um-aumento-considerável-com-pessoas-entre-50-anos-ou-mais-e-tem-índices-de-gordura-elevados." class="section level4">
+<h4>Resposta: o Gráfico de Linhas, mostra que ocorre um aumento
+considerável com pessoas entre 50 anos ou mais, e tem índices de gordura
+elevados.</h4>
+</div>
+</div>
+<div id="gráfico-de-colunas-ou-de-barras" class="section level2">
+<h2>3. Gráfico de Colunas (ou de Barras);</h2>
+<ul>
+<li>dataset(dados_gc)</li>
+</ul>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGFkb3NfZ2MgJT4lIFxuICBjb3VudChpZGFkZSwgcGVzbykgJT4lXG4gIGdncGxvdChhZXMoeCA9IGlkYWRlLCB5ID0gcGVzbywgY29sb3IgPSBwZXNvKSkgK1xuICBnZW9tX2NvbCgpXG5gYGAifQ== -->
+<pre class="r"><code>dados_gc %&gt;% 
+  count(idade, peso) %&gt;%
+  ggplot(aes(x = idade, y = peso, color = peso)) +
+  geom_col()</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<div id="resposta-o-gráfico-de-colunas-ou-de-barras-mostra-como-no-gráfico-de-pontos-que-pessoas-com-idade-entre-40-á-50-anos-tem-um-índice-de-peso-mais-elevado." class="section level4">
+<h4>Resposta: o Gráfico de Colunas (ou de Barras), mostra como no
+gráfico de pontos, que pessoas com idade entre 40 á 50 anos, tem um
+índice de peso mais elevado.</h4>
+</div>
+</div>
+<div id="histograma" class="section level2">
+<h2>4. Histograma;</h2>
+<ul>
+<li>dataset(dados_frango)</li>
+</ul>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGFkb3NfZnJhbmdvICU+JSBcbiAgZ2dwbG90KCkgK1xuICBhZXMoeCA9IHBlc28pICtcbiAgZ2VvbV9oaXN0b2dyYW0oZmlsbCA9IFwiYmx1ZVwiLCBjb2xvciA9IFwiYmxhY2tcIikgK1xuICBsYWJzKFxuICAgIHRpdGxlID0gXCJIaXN0b2dyYW1hIGRhcyBwZXNvc1wiLFxuICAgIHggPSBcInBlc29zXCIsXG4gICAgeSA9IFwiXCJcbiAgKSArXG4gIHRoZW1lX21pbmltYWwoKVxuYGBgIn0= -->
+<pre class="r"><code>dados_frango %&gt;% 
+  ggplot() +
+  aes(x = peso) +
+  geom_histogram(fill = &quot;blue&quot;, color = &quot;black&quot;) +
+  labs(
+    title = &quot;Histograma das pesos&quot;,
+    x = &quot;pesos&quot;,
+    y = &quot;&quot;
+  ) +
+  theme_minimal()</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<div id="resposta-o-histograma-mostra-que-tem-um-aumento-considerável-com-pesos-abaixo-de-100-e-uma-atenuação-pra-pesos-acima-desse-valor." class="section level4">
+<h4>Resposta: o Histograma, mostra que tem um aumento considerável com
+pesos abaixo de 100, e uma atenuação pra pesos acima desse valor.</h4>
+</div>
+</div>
+<div id="gráfico-de-densidade" class="section level2">
+<h2>5. Gráfico de Densidade;</h2>
+<ul>
+<li>dataset(dados_gc)</li>
+</ul>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIGRhZG9zX2djICU+JSBcbiAgZ2dwbG90KCkgK1xuICBhZXMoeCA9IHBlc28gKSArXG4gIGdlb21fZGVuc2l0eShmaWxsID0gXCIjNDA0MDgwXCIpXG4gXG5gYGAifQ== -->
+<pre class="r"><code> dados_gc %&gt;% 
+  ggplot() +
+  aes(x = peso ) +
+  geom_density(fill = &quot;#404080&quot;)
+ </code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<div id="resposta-o-gráfico-de-densidade-mostra-que-tem-um-aumento-considerável-com-pessoas-de-pesos-entre-150-á-200." class="section level4">
+<h4>Resposta: o Gráfico de Densidade, mostra que tem um aumento
+considerável com pessoas de pesos entre 150 á 200.</h4>
+</div>
+</div>
+<div id="boxplot." class="section level2">
+<h2>6. Boxplot.</h2>
+<ul>
+<li>dataset(dados_frango)</li>
+</ul>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGFkb3NfZnJhbmdvICU+JSBcbiAgZ2dwbG90KCkgK1xuICBhZXMoeCA9IHRlbXBvLCB5PSBwZXNvKSArXG4gIGdlb21fYm94cGxvdChhZXMoZmlsbCA9IHRlbXBvKSwgc2hvdy5sZWdlbmQgPSBGQUxTRSkgK1xuICBzY2FsZV9maWxsX3ZpcmlkaXNfZCgpXG5gYGAifQ== -->
+<pre class="r"><code>dados_frango %&gt;% 
+  ggplot() +
+  aes(x = tempo, y= peso) +
+  geom_boxplot(aes(fill = tempo), show.legend = FALSE) +
+  scale_fill_viridis_d()</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<div id="resposta-o-boxplot-mostra-que-a-média-dos-dados-frango-que-o-peso-é-aproximadamente-100." class="section level4">
+<h4>resposta: o Boxplot mostra que a média dos dados frango, que o peso
+é aproximadamente 100.</h4>
+<!-- rnb-text-end -->
+</div>
+</div>
+</div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKVGhpcyBpcyBhbiBbUiBNYXJrZG93bl0oaHR0cDovL3JtYXJrZG93bi5yc3R1ZGlvLmNvbSkgTm90ZWJvb2suIFdoZW4geW91IGV4ZWN1dGUgY29kZSB3aXRoaW4gdGhlIG5vdGVib29rLCB0aGUgcmVzdWx0cyBhcHBlYXIgYmVuZWF0aCB0aGUgY29kZS4gCgpUcnkgZXhlY3V0aW5nIHRoaXMgY2h1bmsgYnkgY2xpY2tpbmcgdGhlICpSdW4qIGJ1dHRvbiB3aXRoaW4gdGhlIGNodW5rIG9yIGJ5IHBsYWNpbmcgeW91ciBjdXJzb3IgaW5zaWRlIGl0IGFuZCBwcmVzc2luZyAqQ3RybCtTaGlmdCtFbnRlciouIAoKYGBge3J9CnBsb3QoY2FycykKYGBgCgpBZGQgYSBuZXcgY2h1bmsgYnkgY2xpY2tpbmcgdGhlICpJbnNlcnQgQ2h1bmsqIGJ1dHRvbiBvbiB0aGUgdG9vbGJhciBvciBieSBwcmVzc2luZyAqQ3RybCtBbHQrSSouCgpXaGVuIHlvdSBzYXZlIHRoZSBub3RlYm9vaywgYW4gSFRNTCBmaWxlIGNvbnRhaW5pbmcgdGhlIGNvZGUgYW5kIG91dHB1dCB3aWxsIGJlIHNhdmVkIGFsb25nc2lkZSBpdCAoY2xpY2sgdGhlICpQcmV2aWV3KiBidXR0b24gb3IgcHJlc3MgKkN0cmwrU2hpZnQrSyogdG8gcHJldmlldyB0aGUgSFRNTCBmaWxlKS4KClRoZSBwcmV2aWV3IHNob3dzIHlvdSBhIHJlbmRlcmVkIEhUTUwgY29weSBvZiB0aGUgY29udGVudHMgb2YgdGhlIGVkaXRvci4gQ29uc2VxdWVudGx5LCB1bmxpa2UgKktuaXQqLCAqUHJldmlldyogZG9lcyBub3QgcnVuIGFueSBSIGNvZGUgY2h1bmtzLiBJbnN0ZWFkLCB0aGUgb3V0cHV0IG9mIHRoZSBjaHVuayB3aGVuIGl0IHdhcyBsYXN0IHJ1biBpbiB0aGUgZWRpdG9yIGlzIGRpc3BsYXllZC4K</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiTGnDp8OjbyBHaXRIdWIgbsK6IDUiCnN1YnRpdGxlOiAiQ29uc3RydWluZG8gZ3LDoWZpY29zIGNvbSBnZ3Bsb3QyIgphdXRob3I6ICJCYXJiYXJhIEFyYXVqbyBQcmF0ZXMiCmRhdGU6ICIoMTgvMDcvMjAyMikiCm91dHB1dDogCiAgICAgICBodG1sX25vdGVib29rOgogICAgICAgdG9jOiB5ZXMKICAgICAgIHRvY19mbG9hdDogeWVzCiAgICAgICBoaWdodGxpZ2h0OiB0YW5nbwotLS0KCi0tLQoKIyBJbnRyb2R1w6fDo28KTGnDp8OjbyBzb2xpY2l0YWRhIHBlbG8gcHJvZmVzc29yIEljYXJvIFZpZGFsIG5hIGRpc2NpcGxpbmEgRXN0YXRhdGlzdGljYSAyMDIxLjIsIGRhIFVuaXZlcnNpZGFkZSBGZWRlcmFsIGRvIFJlY8O0bmNhdm8gZGEgQmFoaWEgKFVGUkIpLCBuZXNzZSByZXBvc2l0w7NyaW8gdXNhcmVtb3MgNiB0aXBvcyBkZSBncsOhZmljb3MsIGRlbnRyZSBlbGVzIEdyw6FmaWNvIGRlIFBvbnRvcywgR3LDoWZpY28gZGUgTGluaGFzLCBHcsOhZmljbyBkZSBDb2x1bmFzLCBIaXN0b2dyYW1hLCBHcsOhZmljbyBkZSBEZW5zaWRhZGUgZSBCb3hwbG90LCBjb20gcGFjb3RlIGdncGxvdDIsIHV0aWxpemFuZG8gZGF0YXNldCwgZnJhbmdvX2RpZXRhLmNzdiBlIGdvcmR1cmFfY29ycG9yYWwuY3N2LgoKIyMjIENhcmVnYW5kbyBvICJ0aWR5dmVyc2UiCgpgYGB7cn0KbGlicmFyeSh0aWR5dmVyc2UpCmBgYAojIyMgTGVuZG8gb3MgZGFkb3MgCgpgYGB7cn0KZGFkb3NfZ2MgPC0gcmVhZF9jc3YoImRhZG9zL2dvcmR1cmFfY29ycG9yYWwuY3N2IikKZGFkb3NfZ2MgJT4lIHZpZXcoKQpgYGAKCgpgYGB7cn0KZGFkb3NfZnJhbmdvIDwtIHJlYWRfY3N2KCJkYWRvcy9mcmFuZ29fZGlldGEuY3N2IikKZGFkb3NfZnJhbmdvICU+JSB2aWV3KCkKYGBgCgoKCiMjIDEuIEdyw6FmaWNvIGRlIFBvbnRvczsKCi0gZGF0YXNldChkYWRvc19nYykKCgpgYGB7cn0KZ2dwbG90KGRhZG9zX2djKSArCiAgYWVzKHggPSBpZGFkZSwgeSA9IHBlc28pICsKICBnZW9tX3BvaW50KHNpemUgPSAxKQpgYGAKCiMjIyMjIFJlc3Bvc3RhOiBvIEdyw6FmaWNvIGRlIFBvbnRvcywgbW9zdHJhIHF1ZSBwZXNzb2FzIGNvbSBpZGFkZSBlbnRyZSA0MCDDoSA1MCBhbm9zLCB0ZW0gdW0gw61uZGljZSBkZSBwZXNvIG1haXMgZWxldmFkbywgcGVsYSBjb25jZW50cmHDp8OjbyBkb3MgcG9udG9zIG5lc3NhcyBpZGFkZXMuCgoKIAojIyAyLiBHcsOhZmljbyBkZSBMaW5oYXM7CgotIGRhdGFzZXQoZGFkb3NfZ2MpCgpgYGB7cn0KZGFkb3NfZ2MgJT4lIAogIGdyb3VwX2J5KGluZGljZV9nb3JkdXJhKSAlPiUgCiAgc3VtbWFyaXNlKAogICAgbWVkaWFfaWRhZGUgPSByb3VuZChtZWFuKGlkYWRlKSwgMSkKICApICU+JSAKICBnZ3Bsb3QoYWVzKHggPSBpbmRpY2VfZ29yZHVyYSwgeSA9IG1lZGlhX2lkYWRlLCBncm91cCA9IDEpKSArCiAgZ2VvbV9saW5lKGNvbG9yID0gIiNCRjYxNkEiLCBzaXplID0gMSkgKwogIGxhYnMoCiAgICB0aXRsZSA9ICJHcsOhZmljbyBkZSBMaW5oYXMgZG9zIGluZGljZXMgZ29yZHVyYXMgIiwKICAgIHggPSAiIiwKICAgIHkgPSAiTcOpZGlhIGRhcyBpZGFkZXMiCiAgKSArCiAgdGhlbWVfbWluaW1hbCgpCmBgYAoKIyMjIyBSZXNwb3N0YTogbyBHcsOhZmljbyBkZSBMaW5oYXMsIG1vc3RyYSBxdWUgb2NvcnJlIHVtIGF1bWVudG8gY29uc2lkZXLDoXZlbCBjb20gcGVzc29hcyBlbnRyZSA1MCBhbm9zIG91IG1haXMsIGUgdGVtIMOtbmRpY2VzIGRlIGdvcmR1cmEgZWxldmFkb3MuCgoKIyMgMy4gR3LDoWZpY28gZGUgQ29sdW5hcyAob3UgZGUgQmFycmFzKTsKCi0gZGF0YXNldChkYWRvc19nYykKCmBgYHtyfQpkYWRvc19nYyAlPiUgCiAgY291bnQoaWRhZGUsIHBlc28pICU+JQogIGdncGxvdChhZXMoeCA9IGlkYWRlLCB5ID0gcGVzbywgY29sb3IgPSBwZXNvKSkgKwogIGdlb21fY29sKCkKYGBgCgoKIyMjIyBSZXNwb3N0YTogbyBHcsOhZmljbyBkZSBDb2x1bmFzIChvdSBkZSBCYXJyYXMpLCBtb3N0cmEgY29tbyBubyBncsOhZmljbyBkZSBwb250b3MsIHF1ZSBwZXNzb2FzIGNvbSBpZGFkZSBlbnRyZSA0MCDDoSA1MCBhbm9zLCB0ZW0gdW0gw61uZGljZSBkZSBwZXNvIG1haXMgZWxldmFkby4KCgojIyA0LiBIaXN0b2dyYW1hOwoKLSBkYXRhc2V0KGRhZG9zX2ZyYW5nbykKCmBgYHtyfQpkYWRvc19mcmFuZ28gJT4lIAogIGdncGxvdCgpICsKICBhZXMoeCA9IHBlc28pICsKICBnZW9tX2hpc3RvZ3JhbShmaWxsID0gImJsdWUiLCBjb2xvciA9ICJibGFjayIpICsKICBsYWJzKAogICAgdGl0bGUgPSAiSGlzdG9ncmFtYSBkYXMgcGVzb3MiLAogICAgeCA9ICJwZXNvcyIsCiAgICB5ID0gIiIKICApICsKICB0aGVtZV9taW5pbWFsKCkKYGBgCgojIyMjIFJlc3Bvc3RhOiBvIEhpc3RvZ3JhbWEsIG1vc3RyYSBxdWUgdGVtIHVtIGF1bWVudG8gY29uc2lkZXLDoXZlbCBjb20gcGVzb3MgYWJhaXhvIGRlIDEwMCwgZSB1bWEgYXRlbnVhw6fDo28gcHJhIHBlc29zIGFjaW1hIGRlc3NlIHZhbG9yLiAgCgojIyA1LiBHcsOhZmljbyBkZSBEZW5zaWRhZGU7CgotIGRhdGFzZXQoZGFkb3NfZ2MpCgpgYGB7cn0KIGRhZG9zX2djICU+JSAKICBnZ3Bsb3QoKSArCiAgYWVzKHggPSBwZXNvICkgKwogIGdlb21fZGVuc2l0eShmaWxsID0gIiM0MDQwODAiKQogCmBgYAoKCiMjIyMgUmVzcG9zdGE6IG8gR3LDoWZpY28gZGUgRGVuc2lkYWRlLCBtb3N0cmEgcXVlIHRlbSB1bSBhdW1lbnRvIGNvbnNpZGVyw6F2ZWwgY29tIHBlc3NvYXMgZGUgcGVzb3MgZW50cmUgMTUwIMOhIDIwMC4gIAoKIyMgNi4gQm94cGxvdC4KCi0gZGF0YXNldChkYWRvc19mcmFuZ28pCgpgYGB7cn0KZGFkb3NfZnJhbmdvICU+JSAKICBnZ3Bsb3QoKSArCiAgYWVzKHggPSB0ZW1wbywgeT0gcGVzbykgKwogIGdlb21fYm94cGxvdChhZXMoZmlsbCA9IHRlbXBvKSwgc2hvdy5sZWdlbmQgPSBGQUxTRSkgKwogIHNjYWxlX2ZpbGxfdmlyaWRpc19kKCkKYGBgCgojIyMjIHJlc3Bvc3RhOiBvIEJveHBsb3QgbW9zdHJhIHF1ZSBhIG3DqWRpYSBkb3MgZGFkb3MgZnJhbmdvLCBxdWUgbyBwZXNvIMOpIGFwcm94aW1hZGFtZW50ZSAxMDAuIAoKCgoKCgoKCg==</div>
 
 
 
