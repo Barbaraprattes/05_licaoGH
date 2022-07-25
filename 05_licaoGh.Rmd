@@ -1,10 +1,10 @@
 ---
-title: "Lição GitHub nº 5"
+title: "Lição GitHub n° 5"
 subtitle: "Construindo gráficos com ggplot2"
 author: "Barbara Araujo Prates"
 date: "(18/07/2022)"
 output: 
-       html_notebook:
+  html_notebook:
        toc: yes
        toc_float: yes
        hightlight: tango
@@ -12,10 +12,10 @@ output:
 
 ---
 
-# Introdução
-Lição solicitada pelo professor Icaro Vidal na disciplina Estatatistica 2021.2, da Universidade Federal do Recôncavo da Bahia (UFRB), nesse repositório usaremos 6 tipos de gráficos, dentre eles Gráfico de Pontos, Gráfico de Linhas, Gráfico de Colunas, Histograma, Gráfico de Densidade e Boxplot, com pacote ggplot2, utilizando dataset, frango_dieta.csv e gordura_corporal.csv.
+## Introdução
+Lição solicitada pelo professor Ícaro Vidal na disciplina Estatística 2021.2, da Universidade Federal do Recôncavo da Bahia (UFRB).Nesse repositório usaremos 6 tipos de gráficos, dentre eles Gráfico de Pontos, Gráfico de Linhas, Gráfico de Colunas, Histograma, Gráfico de Densidade e Boxplot, com pacote ggplot2, utilizando o dataset, frango_dieta.csv e gordura_corporal.csv.
 
-### Caregando o "tidyverse"
+### Carregando o "tidyverse"
 
 ```{r}
 library(tidyverse)
@@ -35,7 +35,8 @@ dados_frango %>% view()
 
 
 
-## 1. Gráfico de Pontos;
+## 1. Gráfico de Pontos
+Dado o dataset de gordura corporal, temos o seguinte gráfico pontos de Idade x Peso desenvolvido abaixo:
 
 - dataset(dados_gc)
 
@@ -43,10 +44,14 @@ dados_frango %>% view()
 ```{r}
 ggplot(dados_gc) +
   aes(x = idade, y = peso) +
-  geom_point(size = 1)
+  geom_point(size = 1) +
+  geom_point(color = "blue") +
+  labs(
+    title =       "Relação de peso por idade",
+  )
 ```
 
-##### Resposta: o Gráfico de Pontos, mostra que pessoas com idade entre 40 á 50 anos, tem um índice de peso mais elevado, pela concentração dos pontos nessas idades.
+##### Resposta: De acordo com o gráfico de pontos as pessoas com idade entre 40 a 50 anos tem um índice de peso mais elevado,justificado  pela maior concentração dos pontos nessas faixa de idade.
 
 
  
@@ -64,7 +69,7 @@ dados_gc %>%
   geom_line(color = "#BF616A", size = 1) +
   labs(
     title = "Gráfico de Linhas dos indices gorduras ",
-    x = "",
+    x = "Índice de gordura",
     y = "Média das idades"
   ) +
   theme_minimal()
